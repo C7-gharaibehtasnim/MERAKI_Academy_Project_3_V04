@@ -1,7 +1,12 @@
-import React from "react";
-
+import React ,{useContext}from "react";
+import { UserContext } from "../../App";
 const AddArticle = () => {
-  return <div>AddArticle</div>;
+  return <div>
+  
+
+
+
+  </div>;
 };
 
 export default AddArticle;
