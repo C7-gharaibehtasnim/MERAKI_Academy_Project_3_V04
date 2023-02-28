@@ -11,6 +11,7 @@ const Dashboard = () => {
     description: "sf",
   });
   const [needupdate, setNeedUpdate] = useState("");
+  const [comment, setComment] = useState("");
   let counter = 1;
 
   useEffect(() => {
@@ -55,7 +56,7 @@ const Dashboard = () => {
 
         const result = articles.map((article, i) => {
           if (article._id == id) {
-            return article = response.data.article;
+            return (article = response.data.article);
           }
           return article;
         });
@@ -66,7 +67,30 @@ const Dashboard = () => {
         console.log(err.response.data.message);
       });
   };
+  const CreateComment = (id) => {
+    axios
+      .post(
+        `http://localhost:5000/articles/${id}/comments/`,
+        { comment },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => {
+        const result = articles.map((article, i) => {
+          if (article._id == id) {
+            article.comments.push(response.data.comment);
+          }
+          return article;
+        });
+        console.log(result);
+        setarticle(result);
 
+        console.log(articles);
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div>
       {articles &&
@@ -76,8 +100,24 @@ const Dashboard = () => {
             <>
               <p>{article.title}</p>
               <p>{article.description}</p>
-              <textarea placeholder="comment..." />
-              <button>Adding comment</button>
+              {article.comments.length > 0 &&
+                article.comments.map((comment, i) => {
+                  return <p>{comment.comment}</p>;
+                })}
+              
+              <textarea
+                onChange={(e) => {
+                  setComment(e.target.value);
+                }}
+                placeholder="comment..."
+              />
+              <button
+                onClick={() => {
+                  CreateComment(article._id);
+                }}
+              >
+                Adding comment
+              </button>
               {userId === articles[i].author && (
                 <>
                   {needupdate === article._id && (
@@ -114,21 +154,17 @@ const Dashboard = () => {
                   </button>
                   <button
                     onClick={() => {
-                        setNeedUpdate(article._id);
-                        counter++
-                        if(counter==1)
-                        {setNeedUpdate(-1);}
-                       console.log(counter)
+                      setNeedUpdate(article._id);
+                      counter++;
+                      if (counter == 1) {
+                        setNeedUpdate(-1);
+                      }
+                      console.log(counter);
                       if (counter === 2) {
                         UpdateByID(article._id, i);
                         counter = 1;
-                        console.log(counter)
-                        }
-                       
-                      
-                      
-
-                     
+                        console.log(counter);
+                      }
                     }}
                   >
                     Update
