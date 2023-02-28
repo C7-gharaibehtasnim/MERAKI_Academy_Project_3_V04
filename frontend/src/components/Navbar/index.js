@@ -1,15 +1,21 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { UserContext } from "../../App";
 const Navbar = () => {
-  const { isLoggedIn } = useContext(UserContext);
+  const { setToken,setIsLoggedIn,isLoggedIn } = useContext(UserContext);
   return (
     <div>
       {isLoggedIn ? (
         <>
           <Link to="/dashboard">Dashboard</Link>
           <Link to ="/addarticle">AddNewArticle</Link>
-          <Link to="/Login">LogOut</Link>
+          <button onClick={()=>{
+            localStorage.clear()
+            setToken(null)
+            setIsLoggedIn(false)
+            Navigate("/login")
+
+          }} >LogOut</button>
         </>
       ) : (
         <>

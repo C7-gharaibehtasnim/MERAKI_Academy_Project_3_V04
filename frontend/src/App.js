@@ -4,8 +4,8 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Dashboard from "./components/Dashboard";
-import React, { useState, createContext } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import React, { useState, createContext, useEffect } from "react";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 export const UserContext = createContext();
 function App() {
   const [addUSER, setADDUSER] = useState({
@@ -18,6 +18,14 @@ function App() {
   });
   const [login, setLogin] = useState({ email: "hi", password: "hello" });
   const [token, setToken] = useState("");
+ useEffect(()=>{
+  setToken(localStorage.getItem("token"))
+  if(token)
+  {
+    setToken(token)
+    Navigate("/dashboard")
+  }
+ },[])
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <UserContext.Provider

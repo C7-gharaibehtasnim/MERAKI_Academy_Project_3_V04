@@ -16,8 +16,11 @@ const Login = () => {
           return !current;
         });
         setToken((current) => {
+          
           return (current = Response.data.token);
+         
         });
+        localStorage.setItem("token",Response.data.token)
         Navigate("/dashboard")
         console.log(Response.data);
       })
