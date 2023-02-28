@@ -17,7 +17,7 @@ const AddArticle = () => {
       .catch((err) => {
         setResultData((current)=>{return current=err.response.data.message})
 
-        console.log();
+      
       });
   };
 
