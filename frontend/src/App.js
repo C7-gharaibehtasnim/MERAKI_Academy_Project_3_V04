@@ -1,28 +1,46 @@
 import "./App.css";
 import AddArticle from "./components/AddArticle";
-import Register from "./components/Register"
-import React ,{useState,createContext} from "react";
+import Register from "./components/Register";
+import Login from "./components/Login";
+import Navbar from "./components/Navbar";
+import Dashboard from "./components/Dashboard";
+import React, { useState, createContext } from "react";
 import { Routes, Route, Link } from "react-router-dom";
-export const UserContext=createContext()
+export const UserContext = createContext();
 function App() {
- 
-  const[addUSER,setADDUSER]=useState({firstName:"ALi",lastName:"Tawaha",age:5,country:"Jordan",email:"ee@gmail.com",password:"HI"})
+  const [addUSER, setADDUSER] = useState({
+    firstName: "ALi",
+    lastName: "Tawaha",
+    age: 5,
+    country: "Jordan",
+    email: "ee@gmail.com",
+    password: "HI",
+  });
+  const [login, setLogin] = useState({ email: "hi", password: "hello" });
+  const [token, setToken] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
-    
-  <UserContext.Provider value={{addUSER,setADDUSER}}>
-    <div className="App">
-      <header className="App-header">
-        <h1>App</h1>
-      </header>
-      <Routes>
-      <Route path="/register" element={ <Register/>} /> 
-     
-      </Routes>
-    </div>
+    <UserContext.Provider
+      value={{ addUSER, setADDUSER, login, setLogin,isLoggedIn,setIsLoggedIn, token, setToken }}
+    >
+      <div className="App">
+        <header className="App-header">
+          <h1>App</h1>
+        </header>
+        <Navbar />
+        <Routes>
+        {isLoggedIn &&<> <Route path="/dashboard" element={<Dashboard/>}/>
+        <Route path="/addarticle" element={<AddArticle/>}/>
+        <Route path="/logout" element={<Login/>}/>
+        </>}
+        
+          <Route path="/register" element={<Register />} state={{ isLoggedIn: false }}  />
+          <Route path="/login" element={<Login />} state={{ isLoggedIn: false }} />
+          
   
+        </Routes>
+      </div>
     </UserContext.Provider>
-  
-     
   );
 }
 
