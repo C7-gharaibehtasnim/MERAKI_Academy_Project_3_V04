@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useContext, useState } from "react";
 import { UserContext } from "../../App";
-import { Button } from 'react-bootstrap';
+
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 const Dashboard = () => {
   const { token } = useContext(UserContext);
   const [userId, setuserid] = useState("");
@@ -13,13 +15,17 @@ const Dashboard = () => {
   });
   const [needupdate, setNeedUpdate] = useState("");
   const [comment, setComment] = useState("");
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   let counter = 1;
 
   useEffect(() => {
     axios
       .get("http://localhost:5000/articles", {
-        headers: { Authorization: token },
+        headers: { Authorization:`Bearer ${token}` },
       })
       .then((Response) => {
         // console.log(Response);
@@ -95,8 +101,8 @@ const Dashboard = () => {
   };
   return (
     <div className="dashboard">
-      {articles &&
-        articles != undefined &&
+      {articles.length &&
+        articles != undefined && 
         articles.map((article, i) => {
           return (
             <div className="article" >
@@ -124,10 +130,78 @@ const Dashboard = () => {
               </div>
               {userId === articles[i].author && (
                 <div className="Update">
-                  {needupdate === article._id && (
+                  {/* {needupdate === article._id && ( */}
                     <div >
                      
-                      <input
+                      {/* <input
+                        onChange={(e) => {
+                          setUpdatedValue((title) => {
+                            return { ...title, title: e.target.value };
+                          });
+                        }}
+                        type="text"
+                        placeholder="title"
+                      />
+                      <textarea
+                        onChange={(e) => {
+                          setUpdatedValue((description) => {
+                            return {
+                              ...description,
+                              description: e.target.value,
+                            };
+                          });
+                        }}
+                        placeholder="description"
+                      /> */}
+                    </div>
+                  {/* )} */}
+                   {/* <button
+                 
+                    onClick={() => {
+                      setNeedUpdate(article._id);
+                      counter++;
+                      if (counter == 1) {
+                        setNeedUpdate("");
+                      }
+                      console.log(counter);
+                      if (counter === 2) {
+                        UpdateByID(article._id, i);
+                        counter = 1;
+                        //setNeedUpdate("")
+                        console.log(counter);
+                      }
+                    }}
+                  >
+                    Update
+                  </button> */}
+ {console.log(article._id)}
+{/* {needupdate === article._id && (  */}
+ 
+  <div>
+<Button variant="primary" onClick={()=>{handleShow()
+ setNeedUpdate(article._id);
+ counter++;
+ if (counter == 1) {
+   setNeedUpdate("");
+ }
+ console.log(counter);
+ if (counter === 2) {
+   UpdateByID(article._id, i);
+   counter = 1;
+   //setNeedUpdate("")
+   console.log(counter);
+ }
+
+}}>
+        Update
+      </Button>
+
+      <Modal show={show && needupdate === article._id } onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <input
                         onChange={(e) => {
                           setUpdatedValue((title) => {
                             return { ...title, title: e.target.value };
@@ -147,26 +221,22 @@ const Dashboard = () => {
                         }}
                         placeholder="description"
                       />
-                    </div>
-                  )}
-                   <button
-                    onClick={() => {
-                      setNeedUpdate(article._id);
-                      counter++;
-                      if (counter == 1) {
-                        setNeedUpdate("");
-                      }
-                      console.log(counter);
-                      if (counter === 2) {
-                        UpdateByID(article._id, i);
-                        counter = 1;
-                        //setNeedUpdate("")
-                        console.log(counter);
-                      }
-                    }}
-                  >
-                    Update
-                  </button>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save 
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+</div>
+
+
+
+
                   <button id="delete"
                     onClick={(e) => {
                       DeleteByID(article._id);
