@@ -5,7 +5,7 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Dashboard from "./components/Dashboard";
 import React, { useState, createContext, useEffect } from "react";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
+import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
 export const UserContext = createContext();
 function App() {
   const [addUSER, setADDUSER] = useState({
@@ -16,16 +16,17 @@ function App() {
     email: "ee@gmail.com",
     password: "HI",
   });
+  const Navigate=useNavigate()
   const [login, setLogin] = useState({ email: "hi", password: "hello" });
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(localStorage.getItem("token"));
+ console.log(token)
  useEffect(()=>{
-  setToken(localStorage.getItem("token"))
   if(token)
   {
-    setToken(token)
+    setIsLoggedIn(true)
     Navigate("/dashboard")
   }
- },[])
+ },[token])
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <UserContext.Provider
@@ -41,7 +42,7 @@ function App() {
         <Route path="/addarticle" element={<AddArticle/>}/>
         <Route path="/logout" element={<Login/>}/>
         </>}
-        
+       
           <Route path="/register" element={<Register />} state={{ isLoggedIn: false }}  />
           <Route path="/login" element={<Login />} state={{ isLoggedIn: false }} />
           

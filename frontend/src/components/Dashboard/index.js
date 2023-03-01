@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useContext, useState } from "react";
 import { UserContext } from "../../App";
+import { Button } from 'react-bootstrap';
 const Dashboard = () => {
   const { token } = useContext(UserContext);
   const [userId, setuserid] = useState("");
@@ -12,6 +13,7 @@ const Dashboard = () => {
   });
   const [needupdate, setNeedUpdate] = useState("");
   const [comment, setComment] = useState("");
+
   let counter = 1;
 
   useEffect(() => {
@@ -92,37 +94,39 @@ const Dashboard = () => {
       });
   };
   return (
-    <div>
+    <div className="dashboard">
       {articles &&
         articles != undefined &&
         articles.map((article, i) => {
           return (
-            <>
-              <p>{article.title}</p>
-              <p>{article.description}</p>
+            <div className="article" >
+              <p id="title">{article.title}</p>
+              <p id="description">{article.description}</p>
+              <div className="commentsdiv">
               {article.comments.length > 0 &&
                 article.comments.map((comment, i) => {
-                  return <p>{comment.comment}</p>;
+                  return <p id="comment">{comment.comment}</p>;
                 })}
               
-              <textarea
+              <textarea id="commenttextarea"
                 onChange={(e) => {
                   setComment(e.target.value);
                 }}
                 placeholder="comment..."
               />
-              <button
+              <button id="commentbtn"
                 onClick={() => {
                   CreateComment(article._id);
                 }}
               >
                 Adding comment
               </button>
+              </div>
               {userId === articles[i].author && (
-                <>
+                <div className="Update">
                   {needupdate === article._id && (
-                    <>
-                      {" "}
+                    <div >
+                     
                       <input
                         onChange={(e) => {
                           setUpdatedValue((title) => {
@@ -141,37 +145,41 @@ const Dashboard = () => {
                             };
                           });
                         }}
-                        placeholder="title"
+                        placeholder="description"
                       />
-                    </>
+                    </div>
                   )}
-                  <button
-                    onClick={(e) => {
-                      DeleteByID(article._id);
-                    }}
-                  >
-                    Delete
-                  </button>
-                  <button
+                   <button
                     onClick={() => {
                       setNeedUpdate(article._id);
                       counter++;
                       if (counter == 1) {
-                        setNeedUpdate(-1);
+                        setNeedUpdate("");
                       }
                       console.log(counter);
                       if (counter === 2) {
                         UpdateByID(article._id, i);
                         counter = 1;
+                        //setNeedUpdate("")
                         console.log(counter);
                       }
                     }}
                   >
                     Update
                   </button>
-                </>
+                  <button id="delete"
+                    onClick={(e) => {
+                      DeleteByID(article._id);
+                    }}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+</svg>
+                  </button>
+                 
+                </div>
               )}
-            </>
+            </div>
           );
         })}
     </div>

@@ -4,7 +4,7 @@ import { UserContext } from "../../App";
 const Navbar = () => {
   const { setToken,setIsLoggedIn,isLoggedIn } = useContext(UserContext);
   return (
-    <div>
+    <div className="NavBar">
       {isLoggedIn ? (
         <>
           <Link to="/dashboard">Dashboard</Link>
@@ -19,7 +19,7 @@ const Navbar = () => {
         </>
       ) : (
         <>
-          {" "}
+        
           <Link to="/register">Register</Link>
           <Link to="/login">Login</Link>
         </>

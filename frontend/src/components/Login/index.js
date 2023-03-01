@@ -29,7 +29,7 @@ const Login = () => {
       });
   };
   return (
-    <div>
+    <div className="register">
       <input
         onChange={(e) =>
           setLogin((email) => {

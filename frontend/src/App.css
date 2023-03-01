@@ -1,6 +1,104 @@
-body{
-    text-align: center;
+body {
+  text-align: center;
 }
-.App{
-    border: solid red ;
+*{
+    padding: 0;
+    margin: 0;
+}
+.App {
+  border: solid red;
+}
+.App h1{text-align: left;padding-left:30px ;}
+a{
+    text-decoration: none;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: black;
+    display: flex;
+    align-items:center;
+    border-radius:4px ;
+    background-color: rgb(77, 169, 162);
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.NavBar {
+  border: solid green;
+  display: flex;
+  column-gap: 40px;
+  margin-left: 300px;
+}
+.register{
+    display: grid;
+    margin-top: 30px;
+   gap: 10px;
+    justify-items: center;
+}
+.article{
+    border: solid gold;
+}
+#delete
+{
+    
+    margin-right: -340px;
+    width: 30px;
+  
+   
+}
+.dashboard{
+    border: solid rgb(230, 185, 62);
+    display: grid;
+    position:absolute;
+    z-index: -1;
+    height: 100vh;
+    width: 100%;
+
+}
+#description
+{
+    border: solid green;width: 30%;margin-left: 340px;   
+}
+.commentsdiv
+{
+  
+    width: 300px;
+
+  
+}
+#comment
+{
+    color: rgb(244, 247, 244);
+    background-color:rgb(83, 165, 126) ;
+    width: 90%;
+  
+    border-radius: 4px;
+    row-gap: 10px;
+}
+#title{font-weight: bold;font-size:30px ;border: solid green;width: 30%;margin-left: 340px;}
+#commenttextarea{width:90%;display: flex; align-items:flex-start;}
+.Update{
+   
+ 
+}
+.Update input{margin-top: -10px;
+ width: 230px;height: 30px;margin-top: -160px;}
+.Update textarea{margin-top: -100px;width: 230px;
+   }
+ .Update button{}   
+input{
+    width: 200px;
+    height: 20px;
+    border-radius: 5px;
+}
+#commentbtn{
+    margin-right: 450px;
+}
+button
+{
+    border-radius: 6px;
+    border: 0;
+    width: 170px;
+    height: 30px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+    background-color: rgb(77, 169, 162);
 }

@@ -22,7 +22,7 @@ const AddArticle = () => {
   };
 
   return (
-    <div>
+    <div className="register">
       <input
         onChange={(e) => {
           setSaveData((title) => {

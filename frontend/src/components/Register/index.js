@@ -23,7 +23,7 @@ const Register = () => {
 
  
   return (
-    <div>
+    <div className="register">
       <input
         onChange={(e) => {
           setADDUSER((firstName) => {
