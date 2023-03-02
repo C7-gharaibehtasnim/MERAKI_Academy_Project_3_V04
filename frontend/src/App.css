@@ -1,40 +1,53 @@
 body {
   text-align: center;
+/* background-repeat: no-repeat; 
+  background-image: url("https://i.pinimg.com/originals/b8/cd/9e/b8cd9ef954f5df9363384d0c49536f61.jpg");
+ background-size: cover; */
 }
+
 *{
     padding: 0;
     margin: 0;
+    font-family: cursive;
 }
 .App {
-  border: solid red;
+  /* border: solid red; */
+  align-items: center;
 }
-.App h1{text-align: left;padding-left:30px ;}
+.App h1{text-align: left;padding-left:30px ;margin-top: 15px ;}
 a{
     text-decoration: none;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color: black;
+    color: rgb(244, 239, 239);
     display: flex;
     align-items:center;
     border-radius:4px ;
-    background-color: rgb(77, 169, 162);
+    background-color:  rgb(9, 77, 29);
     padding: 5px;
     padding-left: 15px;
     padding-right: 15px;
 }
 .NavBar {
-  border: solid green;
+  /* border: solid green; */
   display: flex;
   column-gap: 40px;
-  margin-left: 300px;
+  margin-left: 500px;
 }
 .register{
     display: grid;
     margin-top: 30px;
     gap: 10px;
     justify-items: center;
+  
+    background-size: cover;
+
 }
+
 .article{
-    border: solid gold;
+
+   margin-bottom: 40px;
+   background-color: rgb(213, 220, 209);
+   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 #delete
 {
@@ -45,7 +58,6 @@ a{
    
 }
 .dashboard{
-    border: solid rgb(230, 185, 62);
     display: grid;
     position:absolute;
     z-index: -1;
@@ -55,35 +67,34 @@ a{
 }
 #description
 {
-    border: solid green;width: 30%;margin-left: 40px;   
+    width: 30%;margin-left: 40px;margin-top: 20px;   
 }
 .commentsdiv
 {
   
     width: 300px;
-    border: solid ;
+    display:grid;
+    align-items: center;
+    margin-left: 60%;
+   
+margin-top: -50px;
 
   
 }
 #comment
 {
-    color: rgb(244, 247, 244);
-    background-color:rgb(83, 165, 126) ;
+    color: rgb(19, 21, 19);
+    background-color:rgb(173, 155, 106) ;
     width: 90%;
+  margin: 5px;
   
     border-radius: 4px;
     row-gap: 10px;
 }
-#title{padding:5px; font-weight: bold;font-size:30px ;border: solid green;width: 30%;margin-left: 40px;}
-#commenttextarea{padding: 5px; width:90%;display: flex; align-items:flex-start;}
-.Update{
-   
- 
-}
-.Update input{margin-top: -10px;
- width: 230px;height: 30px;margin-top: -160px;}
-.Update textarea{margin-top: -100px;width: 230px;
-   }
+#title{margin-top: 30px; padding:5px; font-weight: bold;font-size:30px ;width: 30%;margin-left: 40px;}
+#commenttextarea{padding: 5px; width:90%;display: flex; align-items:flex-start;margin-top: 5px;}
+
+
  
 input{
     width: 200px;
@@ -91,24 +102,46 @@ input{
     border-radius: 5px;
 }
 #commentbtn{
-    margin-right: 450px;
+  margin: 15px;
+
 }
 button
 {
     border-radius: 6px;
+    color: white;
     border: 0;
     width: 170px;
     height: 30px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 
-    background-color: rgb(77, 169, 162);
+    background-color: rgb(9, 77, 29);
 }
 .popup{
-    width: 500px;
+  
+    width: 50%;
     border-radius: 15px;
-    background-color: aqua;
-    top:50%;
+    top: 50%;
+    background-color:rgb(173, 155, 106) ;
+
     padding: 12px;
     text-align: center;
-    position:absolute;
+    position:sticky;
+    margin: 10px;
+    z-index: 1;
+   
+
+}
+.Update {justify-content: center;padding: 5px;  margin-top: -15px;margin-right: 930px;}
+.popup input{  margin-left: 60px;margin-top: -60;width: 60%;height: 30px;}
+.popup textarea{  margin-left: 60px;margin-top: 5px;width: 60%;height: 50px;}
+#delete{
+    position:relative;
+    border: solid;
+ display: flex;
+ align-self: auto;
+ align-items: center;
+ bottom:88%;
+ margin-left: 1150px;
+
+   
 }
